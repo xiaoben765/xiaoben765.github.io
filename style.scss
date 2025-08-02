@@ -359,10 +359,26 @@ img {
   }
 
   .site-avatar {
-    margin:0 auto;
+    margin: 0 auto;
     display: block;
-    max-width: 200px;
-    max-height: 200px;
+    max-width: 150px;
+    max-height: 150px;
+    border-radius: 50%;
+    border: 4px solid #ffffff;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+
+    &:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    img {
+      border-radius: 50%;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
 
     @include mobile {
       max-width: 120px;
@@ -737,5 +753,206 @@ footer {
 // ... Otherwise it really bloats up the top of the CSS file and makes it difficult to find the start
 @import "highlights";
 @import "gitalk";
+
+/* 自定义美化样式 */
+
+// 美化搜索容器
+.search-container {
+  margin-bottom: 40px;
+  padding: 20px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 15px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+
+  #search-input {
+    width: 100% !important;
+    height: 50px !important;
+    padding: 0 20px !important;
+    font-size: 16px !important;
+    border: none !important;
+    border-radius: 25px !important;
+    background: rgba(255, 255, 255, 0.95) !important;
+    color: #333 !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1) !important;
+    transition: all 0.3s ease !important;
+
+    &:focus {
+      outline: none !important;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15) !important;
+      transform: translateY(-2px) !important;
+    }
+
+    &::placeholder {
+      color: #888 !important;
+      font-style: italic;
+    }
+  }
+
+  #results-container {
+    margin-top: 15px;
+    max-height: 300px;
+    overflow-y: auto;
+    
+    li {
+      background: rgba(255, 255, 255, 0.9);
+      margin: 5px 0;
+      border-radius: 8px;
+      padding: 10px 15px;
+      transition: all 0.3s ease;
+
+      &:hover {
+        background: rgba(255, 255, 255, 1);
+        transform: translateX(5px);
+      }
+
+      a {
+        color: #333;
+        text-decoration: none;
+        font-weight: 500;
+      }
+    }
+  }
+}
+
+// 美化博客名称
+.site-name {
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+}
+
+// 美化描述文字
+.site-description {
+  font-style: italic;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+  line-height: 1.6;
+}
+
+// 美化文章卡片
+.posts > .post {
+  background: #ffffff;
+  padding: 25px;
+  border-radius: 15px;
+  margin-bottom: 30px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  border: 1px solid #f0f0f0;
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  }
+
+  h1 {
+    margin-bottom: 15px;
+    
+    a {
+      color: #2c3e50;
+      text-decoration: none;
+      transition: color 0.3s ease;
+
+      &:hover {
+        color: #3498db;
+      }
+    }
+  }
+
+  .entry {
+    color: #666;
+    line-height: 1.7;
+    margin: 15px 0;
+  }
+
+  .read-more {
+    background: linear-gradient(135deg, #3498db, #2980b9);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 25px;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.3s ease;
+    font-weight: 500;
+
+    &:hover {
+      background: linear-gradient(135deg, #2980b9, #3498db);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(52, 152, 219, 0.4);
+    }
+  }
+}
+
+// 美化标签
+.tag {
+  list-style: none;
+  
+  li {
+    display: inline-block;
+    margin-right: 10px;
+    
+    a {
+      background: #ecf0f1;
+      color: #34495e;
+      padding: 5px 12px;
+      border-radius: 15px;
+      text-decoration: none;
+      font-size: 12px;
+      transition: all 0.3s ease;
+
+      &:hover {
+        background: #3498db;
+        color: white;
+        transform: translateY(-1px);
+      }
+    }
+  }
+}
+
+// 美化日期
+.date {
+  color: #7f8c8d;
+  font-weight: 400;
+  font-style: italic;
+}
+
+// 美化导航
+nav {
+  a {
+    color: #2c3e50;
+    padding: 12px 20px;
+    border-radius: 25px;
+    margin: 5px 0;
+    display: block;
+    text-align: center;
+    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.1);
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: translateX(5px);
+      color: #3498db;
+    }
+  }
+}
+
+// 响应式优化
+@include mobile {
+  .search-container {
+    margin: 15px;
+    padding: 15px;
+  }
+
+  .posts > .post {
+    margin: 15px;
+    padding: 20px;
+  }
+}
 
 

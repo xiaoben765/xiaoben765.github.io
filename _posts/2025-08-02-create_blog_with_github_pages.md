@@ -1,1 +1,0 @@
-![image-20250802181049773](../images/2025-08-02-create_blog_with_github_pages/image-20250802181049773.png)
