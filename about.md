@@ -15,7 +15,7 @@ permalink: /about/
 如果您想与我交流，可以通过以下方式联系我：
 
 - GitHub: [xiaoben765](https://github.com/xiaoben765)
-- Email: 您的邮箱
+- Email: 983932712@qq.com
 
 ### 关于本站
 
