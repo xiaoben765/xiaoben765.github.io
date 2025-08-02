@@ -1,8 +1,8 @@
 ---
 layout: post
-title: "项目预览：Llama-WebServer - 从Linux网络编程到高性能AI服务后端的演进之路"
+title: "Llama-WebServer"
 date: 2025-08-02
-tags: [项目展示, Linux, 网络编程, AI服务, 高并发]
+tags: [Linux, 网络编程, AI服务, 高并发]
 comments: true
 author: Fengmengguang
 ---
