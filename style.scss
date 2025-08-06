@@ -756,13 +756,13 @@ footer {
 
 /* 自定义文章间距和代码块样式 */
 .post p, .page p, .post ul, .page ul, .post ol, .page ol {
-  line-height: 1.6; /* 调整行高以获得更舒适的阅读体验 */
+  line-height: 1.0; /* 调整行高以获得更舒适的阅读体验 */
   margin-top: 0.8em;
   margin-bottom: 0.8em;
 }
 
 .post li, .page li {
-  line-height: 1.6;
+  line-height: 1.0;
   margin-top: 0.4em;
   margin-bottom: 0.4em;
 }
@@ -1600,6 +1600,68 @@ article.posts {
       margin: 10px 0;
     }
   }
+}
+
+/* 简化版样式覆盖 */
+.post p, .page p, .post ul, .page ul, .post ol, .page ol {
+  line-height: 1.4 !important;
+  margin-top: 0.5em !important;
+  margin-bottom: 0.5em !important;
+}
+
+.post li, .page li {
+  line-height: 1.4 !important;
+  margin-top: 0.2em !important;
+  margin-bottom: 0.2em !important;
+}
+
+.post pre, .page pre {
+  background-color: #f5f5f5 !important;
+  border: 1px solid #ddd !important;
+  border-radius: 4px !important;
+  padding: 10px !important;
+  overflow-x: auto !important;
+  font-size: 14px !important;
+  line-height: 1.3 !important;
+  margin: 10px 0 !important;
+  box-shadow: none !important;
+}
+
+.post code, .page code {
+  font-family: "Courier New", monospace !important;
+  background-color: #f0f0f0 !important;
+  padding: 2px 4px !important;
+  border-radius: 3px !important;
+  font-size: 13px !important;
+  color: #333 !important;
+}
+
+.post pre code, .page pre code {
+  background-color: transparent !important;
+  padding: 0 !important;
+  font-size: inherit !important;
+}
+
+.post h1, .post h2, .post h3, .post h4, .post h5, .post h6,
+.page h1, .page h2, .page h3, .page h4, .page h5, .page h6 {
+  margin-top: 1.2em !important;
+  margin-bottom: 0.6em !important;
+  line-height: 1.3 !important;
+}
+
+.posts > .post {
+  background: #fff !important;
+  padding: 20px !important;
+  border-radius: 8px !important;
+  margin-bottom: 20px !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06) !important;
+  border: 1px solid #eee !important;
+  transform: none !important;
+}
+
+.posts > .post:hover {
+  transform: none !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06) !important;
 }
 
 
