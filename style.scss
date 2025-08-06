@@ -754,6 +754,52 @@ footer {
 @import "highlights";
 @import "gitalk";
 
+/* 自定义文章间距和代码块样式 */
+.post p, .page p, .post ul, .page ul, .post ol, .page ol {
+  line-height: 1.6; /* 调整行高以获得更舒适的阅读体验 */
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
+}
+
+.post li, .page li {
+  line-height: 1.6;
+  margin-top: 0.4em;
+  margin-bottom: 0.4em;
+}
+
+/* 代码块样式 */
+.post pre, .page pre {
+  background-color: #f8f9fa; /* 淡灰色背景 */
+  border: 1px solid #e9ecef; /* 浅色边框 */
+  border-radius: 8px; /* 圆角 */
+  padding: 1.2em; /* 内边距 */
+  overflow-x: auto; /* 内容过长时显示水平滚动条 */
+  font-size: 0.9em; /* 稍小的字体大小 */
+  line-height: 1.4; /* 代码块内的行高 */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08); /* 添加细微阴影 */
+  margin: 1.5em 0; /* 上下外边距 */
+}
+
+/* 行内代码样式 */
+.post code, .page code {
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace; /* 等宽字体 */
+  background-color: rgba(27,31,35,0.07); /* 浅色背景 */
+  border-radius: 4px; /* 圆角 */
+  padding: .2em .4em; /* 内边距 */
+  font-size: 85%; /* 字体大小 */
+  color: #c7254e; /* 字体颜色 */
+}
+
+/* 清除代码块内 code 标签的背景和边距 */
+.post pre code, .page pre code {
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  font-size: 100%;
+  color: inherit; /* 继承 pre 的颜色 */
+}
+
+
 /* 自定义美化样式 */
 
 // 美化搜索容器
