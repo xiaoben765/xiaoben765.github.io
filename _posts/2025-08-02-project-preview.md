@@ -13,11 +13,15 @@ author: Fengmengguang
 
 这个想法，便是我构建 Llama-WebServer 的开端。我的目标很明确：将一个简单的同步阻塞服务器，一步步改造为能够承载 LLaMA 这类大模型、并从容应对高并发请求的AI推理服务后端。
 
+---
+
 ## **1. 项目概述**
 
 `LlamaSever` 是一个基于C++构建的高性能、可扩展的Web服务平台，旨在为大型语言模型（LLM）如LLaMA提供一个稳定、高效且功能丰富的交互界面。项目采用现代化的软件工程实践，实现了一个从底层网络通信到前端用户界面的全栈解决方案。
 
 其核心设计哲学是**“高内聚、低耦合”**，通过精心的模块化分层，将复杂的系统拆解为一组职责清晰、易于维护和独立测试的组件。这使得项目不仅能轻松应对高并发的生产环境需求，也为未来的功能扩展和技术迭代奠定了坚实的基础。
+
+---
 
 ## **2. 模块化架构**
 
@@ -30,43 +34,48 @@ graph TD
     end
 
     subgraph 表现层["表现层 (Presentation)"]
-        B(Static Files)
+        B[静态文件 (Static Files)]
     end
 
     subgraph 应用层["应用层 (Application)"]
-        C[HTTP Server - HttpServer, LlamaHttpApplication] --> D{API 路由}
-        D --> E[用户认证]
-        D --> F[聊天查询]
-        D --> G[管理后台API]
+        C[HTTP 服务器 (HttpServer)]
+        D[API 路由]
+        E[用户认证]
+        F[聊天查询]
+        G[管理后台 API]
     end
 
     subgraph 服务层["服务层 (Services)"]
-        H[LLaMA Service - ILlamaService, ModelInstancePool]
-        I[Database Service - IDatabaseService, MySql/Memory impl.]
+        H[LLaMA 服务 (ILlamaService)]
+        I[数据库服务 (IDatabaseService)]
     end
 
     subgraph 基础设施层["基础设施层 (Infrastructure)"]
-        J[LLaMA TCP Server - 独立进程, 运行模型]
-        K[Database Infrastructure - DBConnectionPool, DatabaseManager]
+        J[LLaMA TCP 服务器]
+        K[数据库基础设施]
     end
 
     subgraph 核心层["核心层 (Core)"]
-        L[网络库 - net]
-        M[日志 - logging]
-        N[线程并发 - thread]
-        O[基础工具 - base/utils]
+        L[网络库 (net)]
+        M[日志系统 (logging)]
+        N[线程并发 (thread)]
+        O[基础工具 (utils)]
     end
 
+    %% 流程连接
     A --> B
     B --> C
-    C --> L
-    C --> M
-    C --> N
-    F --> H
+    C --> D
+    D --> E
+    D --> F
+    D --> G
     E --> I
+    F --> H
     G --> I
     H --> J
     I --> K
+
+    %% 模块依赖
     Application -.-> Services
     Services -.-> Infrastructure
     Services -.-> Core
@@ -74,6 +83,7 @@ graph TD
     Application -.-> Core
     Presentation -.-> Application
 
+    %% 样式定义
     classDef user fill:#e0f2fe,stroke:#a5f3fc,stroke-width:2px;
     classDef presentation fill:#dcfce7,stroke:#86efac,stroke-width:2px;
     classDef app fill:#fef9c3,stroke:#fde047,stroke-width:2px;
@@ -86,7 +96,10 @@ graph TD
     class C,D,E,F,G app;
     class H,I services;
     class J,K infra;
+    class L,M,N,O core;
 </div>
+
+---
 
 **架构层级说明:**
 
@@ -107,7 +120,10 @@ graph TD
 - **表现层 (`Presentation`)**: 用户直接交互的前端界面。
   - **静态资源 (`static_files`)**: 存放于 `static/` 目录下的HTML、CSS 和JavaScript 文件。前端通过 `fetch` API 与应用层暴露的HTTP接口进行通信，实现了前后端分离，为用户提供了现代化、响应迅速的聊天和管理界面。
 
+---
+
 ## **3 思考与改进**
+
 在将一个基础Web服务器改造为高性能AI服务平台的过程中，我主要解决了三大问题：
 
 **问题一：性能瓶颈**
@@ -123,6 +139,7 @@ graph TD
 实践：我将AI模型封装成一个独立的TCP服务进程，实现了Web应用与模型推理的物理隔离。主服务器通过连接池与模型服务通信，显著提升了系统的稳定性和可扩展性。
 
 **问题三：代码的可维护性**
+
 思考：随着功能增多，代码必须结构清晰才能维护。
 
 实践：我引入了分层架构（核心层、服务层、应用层），并采用接口驱动设计（如ILlamaService）。这使得各模块职责明确，易于独立测试和修改，例如可以轻松切换真实数据库与内存数据库，极大提高了开发效率。
