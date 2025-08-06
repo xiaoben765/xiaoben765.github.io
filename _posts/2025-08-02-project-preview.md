@@ -29,58 +29,51 @@ graph TD
         A[静态资源: HTML/CSS/JS]
     end
 
-    subgraph Presentation["表现层 (Presentation)"]
+    subgraph 表现层["表现层 (Presentation)"]
         B(Static Files)
     end
 
-    subgraph Application["应用层 (Application)"]
+    subgraph 应用层["应用层 (Application)"]
         C[HTTP Server - HttpServer, LlamaHttpApplication] --> D{API 路由}
         D --> E[用户认证]
         D --> F[聊天查询]
         D --> G[管理后台API]
     end
 
-    subgraph Services["服务层 (Services)"]
+    subgraph 服务层["服务层 (Services)"]
         H[LLaMA Service - ILlamaService, ModelInstancePool]
         I[Database Service - IDatabaseService, MySql/Memory impl.]
     end
 
-    subgraph Infrastructure["基础设施层 (Infrastructure)"]
+    subgraph 基础设施层["基础设施层 (Infrastructure)"]
         J[LLaMA TCP Server - 独立进程, 运行模型]
         K[Database Infrastructure - DBConnectionPool, DatabaseManager]
     end
 
-    subgraph Core["核心层 (Core)"]
+    subgraph 核心层["核心层 (Core)"]
         L[网络库 - net]
         M[日志 - logging]
         N[线程并发 - thread]
         O[基础工具 - base/utils]
     end
 
-    %% 流程连线
-    A -- "1. 加载前端页面" --> B
-    B -- "2. HTTP请求" --> C
-    
-    C -- "使用" --> L
-    C -- "使用" --> M
-    C -- "使用" --> N
+    A --> B
+    B --> C
+    C --> L
+    C --> M
+    C --> N
+    F --> H
+    E --> I
+    G --> I
+    H --> J
+    I --> K
+    Application -.-> Services
+    Services -.-> Infrastructure
+    Services -.-> Core
+    Infrastructure -.-> Core
+    Application -.-> Core
+    Presentation -.-> Application
 
-    F -- "3. 调用LLaMA服务" --> H
-    E -- "3. 调用数据库服务" --> I
-    G -- "3. 调用数据库服务" --> I
-    
-    H -- "4. TCP请求" --> J
-    I -- "4. SQL查询" --> K
-    
-    %% 模块依赖关系 (虚线)
-    Application -- "依赖" --> Services
-    Services -- "依赖" --> Infrastructure
-    Services -- "依赖" --> Core
-    Infrastructure -- "依赖" --> Core
-    Application -- "依赖" --> Core
-    Presentation -- "被部署在" --> Application
-
-    %% 样式
     classDef user fill:#e0f2fe,stroke:#a5f3fc,stroke-width:2px;
     classDef presentation fill:#dcfce7,stroke:#86efac,stroke-width:2px;
     classDef app fill:#fef9c3,stroke:#fde047,stroke-width:2px;
@@ -118,13 +111,18 @@ graph TD
 在将一个基础Web服务器改造为高性能AI服务平台的过程中，我主要解决了三大问题：
 
 **问题一：性能瓶颈**
+
 思考：同步执行的AI推理会严重阻塞服务器，使其无法处理并发请求。核心在于必须将耗时的计算与高频的网络I/O分离。
+
 实践：我构建了基于Epoll的异步网络库来处理I/O，并创建了一个异步任务队列（线程池），将所有AI计算任务抛入其中。这确保了I/O线程永不阻塞，实现了高并发处理能力。
 
 **问题二：系统耦合与稳定性**
+
 思考：将模型与Web服务直接集成，会导致系统脆弱且难以独立扩展。一方的崩溃会拖垮全局。
+
 实践：我将AI模型封装成一个独立的TCP服务进程，实现了Web应用与模型推理的物理隔离。主服务器通过连接池与模型服务通信，显著提升了系统的稳定性和可扩展性。
 
 **问题三：代码的可维护性**
 思考：随着功能增多，代码必须结构清晰才能维护。
+
 实践：我引入了分层架构（核心层、服务层、应用层），并采用接口驱动设计（如ILlamaService）。这使得各模块职责明确，易于独立测试和修改，例如可以轻松切换真实数据库与内存数据库，极大提高了开发效率。
