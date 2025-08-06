@@ -13,15 +13,11 @@ author: Fengmengguang
 
 这个想法，便是我构建 Llama-WebServer 的开端。我的目标很明确：将一个简单的同步阻塞服务器，一步步改造为能够承载 LLaMA 这类大模型、并从容应对高并发请求的AI推理服务后端。
 
----
-
 ## **1. 项目概述**
 
 `LlamaSever` 是一个基于C++构建的高性能、可扩展的Web服务平台，旨在为大型语言模型（LLM）如LLaMA提供一个稳定、高效且功能丰富的交互界面。项目采用现代化的软件工程实践，实现了一个从底层网络通信到前端用户界面的全栈解决方案。
 
 其核心设计哲学是**“高内聚、低耦合”**，通过精心的模块化分层，将复杂的系统拆解为一组职责清晰、易于维护和独立测试的组件。这使得项目不仅能轻松应对高并发的生产环境需求，也为未来的功能扩展和技术迭代奠定了坚实的基础。
-
----
 
 ## **2. 模块化架构**
 
@@ -62,7 +58,6 @@ graph TD
         O[基础工具 (utils)]
     end
 
-    %% 流程连接
     A --> B
     B --> C
     C --> D
@@ -75,31 +70,13 @@ graph TD
     H --> J
     I --> K
 
-    %% 模块依赖
     Application -.-> Services
     Services -.-> Infrastructure
     Services -.-> Core
     Infrastructure -.-> Core
     Application -.-> Core
     Presentation -.-> Application
-
-    %% 样式定义
-    classDef user fill:#e0f2fe,stroke:#a5f3fc,stroke-width:2px;
-    classDef presentation fill:#dcfce7,stroke:#86efac,stroke-width:2px;
-    classDef app fill:#fef9c3,stroke:#fde047,stroke-width:2px;
-    classDef services fill:#fee2e2,stroke:#f87171,stroke-width:2px;
-    classDef infra fill:#f3e8ff,stroke:#c084fc,stroke-width:2px;
-    classDef core fill:#e0e7ff,stroke:#a5b4fc,stroke-width:2px;
-
-    class User user;
-    class A,B presentation;
-    class C,D,E,F,G app;
-    class H,I services;
-    class J,K infra;
-    class L,M,N,O core;
 </div>
-
----
 
 **架构层级说明:**
 
