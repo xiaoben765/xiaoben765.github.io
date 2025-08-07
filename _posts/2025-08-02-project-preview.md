@@ -37,6 +37,7 @@ src/http/Middleware.cc
 ### 2. LLaMA TCP 服务模块
 
 职责：接收来自 HTTP 服务器的 TCP 请求，与 LLaMA 模型进行交互
+
 涉及文件：
 ```
 src/llama_service_tcp.cc
@@ -46,6 +47,7 @@ src/services/LlamaTcpServer.cc
 ### 3. 数据库模块
 
 职责：通过 DatabaseManager 与 MySQL 数据库交互，提供用户管理、会话管理等功能
+
 涉及文件：
 ```
 src/db/DatabaseManager.cpp, src/db/DBConnectionPool.cc
@@ -55,6 +57,7 @@ src/db/DBQueryHelper.cc
 ### 4. 核心库模块
 
 职责：提供项目依赖的基础功能，如日志、内存管理、线程池等
+
 涉及文件：
 ```
 log/
