@@ -43,8 +43,8 @@ graph LR
     end
 
     subgraph sg_svc_layer [服务层]
-        LlamaAsync("LLaMA 异步服务<br>(客户端, 实例池)")
         Database("数据库服务<br>(管理器, 连接池)")
+        LlamaAsync("LLaMA 异步服务<br>(客户端, 实例池)")
     end
 
     subgraph sg_net_layer [网络库层 - Reactor]
