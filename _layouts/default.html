@@ -17,6 +17,28 @@
     </div>
 
     {% include analytics.html %}
+    
+    <!-- Mermaid initialization script -->
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        // Find all mermaid code blocks
+        const mermaidBlocks = document.querySelectorAll('code.language-mermaid');
+        mermaidBlocks.forEach(function(block, index) {
+          // Create a new div for the mermaid diagram
+          const mermaidDiv = document.createElement('div');
+          mermaidDiv.className = 'mermaid';
+          mermaidDiv.innerHTML = block.textContent;
+          
+          // Replace the code block with the mermaid div
+          block.parentNode.parentNode.replaceChild(mermaidDiv, block.parentNode);
+        });
+        
+        // Re-initialize mermaid after DOM manipulation
+        if (typeof mermaid !== 'undefined') {
+          mermaid.init();
+        }
+      });
+    </script>
   </body>
 
   {% if page.toc==true %}
