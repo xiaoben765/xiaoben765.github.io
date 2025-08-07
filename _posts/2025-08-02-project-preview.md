@@ -3,11 +3,7 @@ layout: post
 title: "Llama-WebServer项目解析"
 date: 2025-08-02
 tags: [C++, Llama, WebServer, 源码解析]
-com- #### 事件循环 (EventLoop.h, E- #### 异步日志系统 (log/)
-  - **职责**：提供高性能的日志记录功能。
-  - **实现**：采用"前端 + 后端"的异步模式。业务线程（前端）只负责将日志消息快速写入内存缓冲区，一个专门的日志线程（后端）负责将缓冲区中的数据批量写入文件，避免了日志 I/O 阻塞业务线程。oop.cc)
-  - **职责**：Reactor 模式的"心脏"。每个 I/O 线程都拥有一个 EventLoop 对象，它在一个循环中不断地等待事件、处理事件。
-  - **实现**：内部封装了一个 Poller（IO复用模块，如 epoll）和一个 TimerQueue（定时器队列）。它还实现了 runInLoop 和 queueInLoop 机制，用于实现线程安全的任务派发。: true
+comments: true
 author: Fengmengguang
 ---
 
