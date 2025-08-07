@@ -17,6 +17,7 @@ author: Fengmengguang
 
 
 ```mermaid
+
 graph TD
     %% 样式定义
     style A fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px
@@ -68,6 +69,7 @@ graph TD
     G --> H
     
     H --> I
+
 ```
 
 **流程图解读：**
@@ -77,7 +79,7 @@ graph TD
    - **解析**：`HttpContext` 和 `HttpParser` 协同工作，像一个翻译官，将无格式的字节流翻译成程序可以理解的、结构化的 `HttpRequest` 对象（包含请求头、路径、方法、正文等）。
    - **中间件**：在进入核心业务逻辑之前，请求会穿过一个由 `Middleware` 组成的“安检通道”（责任链模式）。在这里，可以执行日志记录、用户认证、CORS 跨域检查等一系列通用操作。
 3. **路由分发**：请求经过“安检”后，到达 `Router`（路由器）。`Router` 会检查请求的 URL 路径和方法（如 `GET /api/query`），然后像一个交通警察一样，将请求指向正确的处理器。
-4. **业务逻辑处理 **：
+4. **业务逻辑处理**：
    - **API 处理**：如果请求匹配了一个 API 路由，它会被分发给 `LlamaHttpApplication`。这是业务逻辑的核心，它会去调用更下层的服务（如数据库服务、LLaMA 服务）来完成具体的任务。
    - **静态文件处理**：如果请求的是一个静态文件（如 `index.html` 或 `style.css`），`静态文件处理器` 会直接从磁盘读取文件内容。
    - **404 处理**：如果 `Router` 找不到任何匹配的处理器，就会交给 `404 处理器` 来生成一个“未找到”的错误页面。
@@ -92,6 +94,7 @@ graph TD
 下面是参考的理解步骤：
 
 ```mermaid
+
 graph LR
     %% 样式定义，设置基础字体样式
     classDef baseStyle font-size:16px, font-family:Arial, sans-serif;
@@ -115,6 +118,7 @@ graph LR
     M2 --> M3
     M3 --> M4
     M4 --> M5
+
 ```
 
 需要思考几个问题：
