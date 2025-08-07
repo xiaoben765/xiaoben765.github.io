@@ -319,7 +319,7 @@ img {
 //
 
 .wrapper-sidebar {
-  width: 15%;
+  width: 60px; /* 默认收起状态，只显示图标 */
 	-webkit-background-size: cover;
 	background-size: cover;
 	background-color: $background-color;
@@ -329,6 +329,30 @@ img {
 	position: fixed;
 	z-index: 4;
   border-right: 1px solid $divider-color;
+  transition: width 0.3s ease; /* 添加平滑过渡动画 */
+  overflow: hidden; /* 隐藏溢出内容 */
+
+  /* 添加一个菜单指示器 */
+  &::before {
+    content: "☰";
+    position: absolute;
+    top: 25px;
+    right: 18px;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 16px;
+    z-index: 1000;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+  }
+
+  /* 鼠标悬停时展开 */
+  &:hover {
+    width: 280px;
+    
+    &::before {
+      opacity: 0; /* 展开时隐藏菜单图标 */
+    }
+  }
 
   @include mobile {
     width: 100%;
@@ -337,11 +361,20 @@ img {
     position: relative;
     border-bottom: 1px solid $divider-color;
     border-right: 0;
+    
+    &::before {
+      display: none; /* 移动端不显示菜单图标 */
+    }
+    
+    &:hover {
+      width: 100%; /* 移动端保持100%宽度 */
+    }
   }
 }
 
 .sidebar {
   padding: 20px 0;
+  white-space: nowrap; /* 防止文字换行 */
 
   @include mobile {
     text-align: center;
@@ -349,8 +382,8 @@ img {
 }
 
 .site-info {
-  text-align:center;
-  margin: 60px auto 0;
+  text-align: center;
+  margin: 40px auto 0; /* 减少上边距 */
 
   @include mobile {
     float: none;
@@ -361,12 +394,19 @@ img {
   .site-avatar {
     margin: 0 auto;
     display: block;
-    max-width: 100px;
-    max-height: 100px;
+    max-width: 50px; /* 收起时显示小头像 */
+    max-height: 50px;
     border-radius: 50%;
-    border: 3px solid #ffffff;
-    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.2);
+    border: 2px solid #ffffff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
     transition: all 0.3s ease;
+
+    /* 当sidebar展开时，头像变大 */
+    .wrapper-sidebar:hover & {
+      max-width: 120px;
+      max-height: 120px;
+      border: 3px solid #ffffff;
+    }
 
     &:hover {
       transform: scale(1.05);
@@ -398,16 +438,43 @@ img {
   cursor: pointer;
   font-family: $base-font;
   font-weight: 700;
-  font-size: 22px;
+  font-size: 18px; /* 收起时的字体大小 */
   letter-spacing: 1px;
+  opacity: 0; /* 默认隐藏 */
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  overflow: hidden;
+
+  /* 当sidebar展开时显示完整文本 */
+  .wrapper-sidebar:hover & {
+    opacity: 1;
+    font-size: 26px;
+  }
+
+  @include mobile {
+    opacity: 1;
+    font-size: 26px;
+  }
 }
 
 .site-description {
   margin: 12px auto;
   color: $base-lighten-color;
-  font-size: 12px;
+  font-size: 12px; /* 收起时的字体大小 */
+  opacity: 0; /* 默认隐藏 */
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  overflow: hidden;
+
+  /* 当sidebar展开时显示完整文本 */
+  .wrapper-sidebar:hover & {
+    opacity: 1;
+    font-size: 15px;
+  }
 
   @include mobile {
+    opacity: 1;
+    font-size: 15px;
     margin: 10px auto;
   }
 }
@@ -418,21 +485,36 @@ img {
 
 nav {
   display: block;
-  margin-top: 20px; // @TODO: Vertically middle align
+  margin-top: 15px; // @TODO: Vertically middle align
   font-family: $base-font;
   font-weight: 500;
-  font-size: 16px;
+  font-size: 14px; /* 收起时的字体大小 */
+  opacity: 0; /* 默认隐藏 */
+  transition: all 0.3s ease;
+
+  /* 当sidebar展开时显示完整导航 */
+  .wrapper-sidebar:hover & {
+    opacity: 1;
+    font-size: 17px;
+  }
 
   @include mobile {
+    opacity: 1;
     margin-top: 9px;
     font-size: 16px;
   }
 
   a {
-    margin: 0 8px;
+    margin: 0 5px; /* 收起时更紧凑的间距 */
     text-align: right;
     font-weight: 300;
     letter-spacing: 1px;
+    white-space: nowrap;
+
+    /* 当sidebar展开时恢复正常间距 */
+    .wrapper-sidebar:hover & {
+      margin: 0 10px;
+    }
 
     @include mobile {
       margin: 0 10px;
@@ -444,12 +526,14 @@ nav {
 // content
 
 .wrapper-content {
-  float: right;
-  width: 85%;
+  margin-left: 60px; /* 为收起的sidebar留出空间 */
+  width: calc(100% - 60px); /* 占据剩余空间 */
+  transition: margin-left 0.3s ease, width 0.3s ease; /* 平滑过渡 */
 
   @include mobile {
     float: none;
     width: 100%;
+    margin-left: 0;
   }
 }
 
@@ -1330,7 +1414,7 @@ article.posts {
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
   margin: 20px auto;
   border: 1px solid #f0f0f0;
-  max-width: 1300px;
+  max-width: 1600px;
   
   // 文章标题
   h1 {
