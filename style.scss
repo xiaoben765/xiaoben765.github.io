@@ -319,7 +319,7 @@ img {
 //
 
 .wrapper-sidebar {
-  width: 60px; /* 默认收起状态，只显示图标 */
+  width: 280px; /* 首页默认展开状态 */
 	-webkit-background-size: cover;
 	background-size: cover;
 	background-color: $background-color;
@@ -331,6 +331,20 @@ img {
   border-right: 1px solid $divider-color;
   transition: width 0.3s ease; /* 添加平滑过渡动画 */
   overflow: hidden; /* 隐藏溢出内容 */
+
+  @include mobile {
+    width: 100%;
+    height: auto;
+    padding-bottom: 24px;
+    position: relative;
+    border-bottom: 1px solid $divider-color;
+    border-right: 0;
+  }
+}
+
+/* 文章页面的收缩侧边栏样式 */
+body.post-page .wrapper-sidebar {
+  width: 60px; /* 文章页面默认收起状态 */
 
   /* 添加一个菜单指示器 */
   &::before {
@@ -356,11 +370,6 @@ img {
 
   @include mobile {
     width: 100%;
-    height: auto;
-    padding-bottom: 24px;
-    position: relative;
-    border-bottom: 1px solid $divider-color;
-    border-right: 0;
     
     &::before {
       display: none; /* 移动端不显示菜单图标 */
@@ -394,19 +403,12 @@ img {
   .site-avatar {
     margin: 0 auto;
     display: block;
-    max-width: 50px; /* 收起时显示小头像 */
-    max-height: 50px;
+    max-width: 120px; /* 首页默认大头像 */
+    max-height: 120px;
     border-radius: 50%;
     border: 2px solid #ffffff;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
     transition: all 0.3s ease;
-
-    /* 当sidebar展开时，头像变大 */
-    .wrapper-sidebar:hover & {
-      max-width: 120px;
-      max-height: 120px;
-      border: 3px solid #ffffff;
-    }
 
     &:hover {
       transform: scale(1.05);
@@ -432,18 +434,64 @@ img {
   }
 }
 
+/* 文章页面的头像样式 */
+body.post-page .site-info .site-avatar {
+  max-width: 50px; /* 收起时显示小头像 */
+  max-height: 50px;
+  border: 2px solid #ffffff;
+
+  /* 当sidebar展开时，头像变大 */
+  .wrapper-sidebar:hover & {
+    max-width: 120px;
+    max-height: 120px;
+    border: 3px solid #ffffff;
+  }
+
+  @include mobile {
+    max-width: 120px;
+    max-height: 120px;
+  }
+}
+
 .site-name {
   margin: 0 auto;
   color: $base-color;
   cursor: pointer;
   font-family: $base-font;
   font-weight: 700;
-  font-size: 18px; /* 收起时的字体大小 */
+  font-size: 26px; /* 首页默认正常字体大小 */
   letter-spacing: 1px;
-  opacity: 0; /* 默认隐藏 */
+  opacity: 1; /* 首页默认显示 */
   transition: all 0.3s ease;
   white-space: nowrap;
   overflow: hidden;
+
+  @include mobile {
+    opacity: 1;
+    font-size: 26px;
+  }
+}
+
+.site-description {
+  margin: 12px auto;
+  color: $base-lighten-color;
+  font-size: 15px; /* 首页默认正常字体大小 */
+  opacity: 1; /* 首页默认显示 */
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  overflow: hidden;
+
+  @include mobile {
+    opacity: 1;
+    font-size: 15px;
+    margin: 10px auto;
+  }
+}
+
+/* 文章页面的网站名称和描述样式 */
+body.post-page .site-name {
+  font-size: 18px; /* 收起时的字体大小 */
+  opacity: 0; /* 默认隐藏 */
 
   /* 当sidebar展开时显示完整文本 */
   .wrapper-sidebar:hover & {
@@ -457,14 +505,9 @@ img {
   }
 }
 
-.site-description {
-  margin: 12px auto;
-  color: $base-lighten-color;
+body.post-page .site-description {
   font-size: 12px; /* 收起时的字体大小 */
   opacity: 0; /* 默认隐藏 */
-  transition: all 0.3s ease;
-  white-space: nowrap;
-  overflow: hidden;
 
   /* 当sidebar展开时显示完整文本 */
   .wrapper-sidebar:hover & {
@@ -488,9 +531,34 @@ nav {
   margin-top: 15px; // @TODO: Vertically middle align
   font-family: $base-font;
   font-weight: 500;
+  font-size: 17px; /* 首页默认正常字体大小 */
+  opacity: 1; /* 首页默认显示 */
+  transition: all 0.3s ease;
+
+  @include mobile {
+    opacity: 1;
+    margin-top: 9px;
+    font-size: 16px;
+  }
+
+  a {
+    margin: 0 10px; /* 首页默认正常间距 */
+    text-align: right;
+    font-weight: 300;
+    letter-spacing: 1px;
+    white-space: nowrap;
+
+    @include mobile {
+      margin: 0 10px;
+      color: $link-color;
+    }
+  }
+}
+
+/* 文章页面的导航样式 */
+body.post-page nav {
   font-size: 14px; /* 收起时的字体大小 */
   opacity: 0; /* 默认隐藏 */
-  transition: all 0.3s ease;
 
   /* 当sidebar展开时显示完整导航 */
   .wrapper-sidebar:hover & {
@@ -506,10 +574,6 @@ nav {
 
   a {
     margin: 0 5px; /* 收起时更紧凑的间距 */
-    text-align: right;
-    font-weight: 300;
-    letter-spacing: 1px;
-    white-space: nowrap;
 
     /* 当sidebar展开时恢复正常间距 */
     .wrapper-sidebar:hover & {
@@ -526,8 +590,8 @@ nav {
 // content
 
 .wrapper-content {
-  margin-left: 60px; /* 为收起的sidebar留出空间 */
-  width: calc(100% - 60px); /* 占据剩余空间 */
+  margin-left: 280px; /* 首页默认给固定侧边栏留出空间 */
+  width: calc(100% - 280px); /* 占据剩余空间 */
   transition: margin-left 0.3s ease, width 0.3s ease; /* 平滑过渡 */
 
   @include mobile {
@@ -535,6 +599,33 @@ nav {
     width: 100%;
     margin-left: 0;
   }
+}
+
+/* 文章页面的内容区域样式 */
+body.post-page .wrapper-content {
+  margin-left: 60px; /* 文章页面给收起的侧边栏留出空间 */
+  width: calc(100% - 60px);
+
+  @include mobile {
+    margin-left: 0;
+    width: 100%;
+  }
+}
+
+/* 首页样式优化 */
+body.home-page .wrapper-content {
+  padding: 20px;
+}
+
+body.home-page .container {
+  max-width: none; /* 移除最大宽度限制，让内容自适应 */
+  width: 100%;
+  padding: 0 20px;
+}
+
+/* 文章页面样式优化 */
+body.post-page .container {
+  max-width: 1600px; /* 文章页面保持合理的最大宽度 */
 }
 
 // Posts

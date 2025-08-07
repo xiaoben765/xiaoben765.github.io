@@ -18,6 +18,20 @@
 
     {% include analytics.html %}
     
+    <!-- Page type detection script -->
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        // 检测页面类型并添加相应的CSS类
+        if (document.querySelector('article.post')) {
+          // 文章页面
+          document.body.classList.add('post-page');
+        } else {
+          // 首页或其他页面
+          document.body.classList.add('home-page');
+        }
+      });
+    </script>
+    
     <!-- Mermaid initialization script -->
     <script>
       document.addEventListener('DOMContentLoaded', function() {
