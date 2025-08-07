@@ -24,9 +24,8 @@ LlamaWebServer 是一个基于 C++ 的模块化 Web 服务项目，主要用作�
 
 ### 1. HTTP 服务器模块
 
-### 1. HTTP 服务器模块
-
 职责：处理所有面向用户的 HTTP 业务，包括路由、中间件和静态文件服务
+
 核心类：LlamaHttpApplication
 涉及文件：
 ```

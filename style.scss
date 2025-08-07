@@ -22,23 +22,23 @@ html {
 body {
   font-family: $base-font;
   color: $base-color;
-  line-height: 1.7em;
+  line-height: 1.6em;
 }
 
 .container {
   margin: 0 auto;
-  max-width: 1000px;
-  padding: 0 20px;
+  max-width: 1200px;
+  padding: 0 30px;
   width: 100%;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  line-height: 1.5em;
+  line-height: 1.4em;
   margin: 1em 0 0.5em;
   padding: 0;
 
   @include mobile {
-    line-height: 1.6em;
+    line-height: 1.5em;
   }
 }
 
@@ -72,7 +72,7 @@ h6 {
 
 p {
   color: $text-color;
-  margin: 0.5em 0;
+  margin: 0.4em 0;
 }
 
 a {
@@ -1325,11 +1325,12 @@ nav {
 // 单独文章页面样式
 article.posts {
   background: #ffffff;
-  padding: 40px;
+  padding: 40px 50px;
   border-radius: 20px;
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
-  margin: 20px;
+  margin: 20px auto;
   border: 1px solid #f0f0f0;
+  max-width: 1100px;
   
   // 文章标题
   h1 {
@@ -1398,19 +1399,19 @@ article.posts {
   
   // 文章内容
   .entry {
-    line-height: 1.8;
-    font-size: 1.1em;
+    line-height: 1.6;
+    font-size: 1.05em;
     color: #333;
     
     // 段落样式
     p {
-      margin: 1.5em 0;
+      margin: 1em 0;
       text-align: justify;
     }
     
     // 标题样式
     h1, h2, h3, h4, h5, h6 {
-      margin: 2em 0 1em 0;
+      margin: 1.5em 0 0.8em 0;
       color: #2c3e50;
       font-weight: 600;
     }
@@ -1581,7 +1582,7 @@ article.posts {
 @include mobile {
   article.posts {
     margin: 10px;
-    padding: 25px;
+    padding: 25px 20px;
     
     h1 {
       font-size: 2em;
@@ -1589,6 +1590,7 @@ article.posts {
     
     .entry {
       font-size: 1em;
+      line-height: 1.6;
     }
   }
   
@@ -1604,15 +1606,15 @@ article.posts {
 
 /* 简化版样式覆盖 */
 .post p, .page p, .post ul, .page ul, .post ol, .page ol {
-  line-height: 1.4 !important;
-  margin-top: 0.5em !important;
-  margin-bottom: 0.5em !important;
+  line-height: 1.5 !important;
+  margin-top: 0.4em !important;
+  margin-bottom: 0.4em !important;
 }
 
 .post li, .page li {
-  line-height: 1.4 !important;
-  margin-top: 0.2em !important;
-  margin-bottom: 0.2em !important;
+  line-height: 1.5 !important;
+  margin-top: 0.15em !important;
+  margin-bottom: 0.15em !important;
 }
 
 .post pre, .page pre {
