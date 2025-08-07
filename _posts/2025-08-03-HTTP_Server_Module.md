@@ -7,7 +7,7 @@ comments: true
 author: Fengmengguang
 ---
 
-# HTTP Server 模块是什么？
+## HTTP Server 模块是什么？
 
 在开发 AI 问答助手这类应用时，HTTP Server 模块是连接用户（业务层）与核心 AI 能力（服务层）的 “桥梁”。它封装了底层网络通信逻辑，通过标准化的 HTTP 接口接收用户提问，调用 AI 模型生成答案后再返回结果。
 
@@ -119,10 +119,10 @@ graph LR
 
 需要思考几个问题：
 
-> 1、理解当一个客户端（如浏览器）连接到服务器并发送数据时，数据是如何通过 `TcpServer` 被接收，并最终以原始字节流的形式出现在 `TcpConnection` 的 `onMessage` 回调中的。
+1、理解当一个客户端（如浏览器）连接到服务器并发送数据时，数据是如何通过 `TcpServer` 被接收，并最终以原始字节流的形式出现在 `TcpConnection` 的 `onMessage` 回调中的。
 
-> 2、明白 `HttpServer` 是如何在其 `onMessage` 回调中，利用 `HttpContext` 将 `TcpConnection` 送来的原始字节流，转换成一个完整的 `HttpRequest` 对象的。
+2、明白 `HttpServer` 是如何在其 `onMessage` 回调中，利用 `HttpContext` 将 `TcpConnection` 送来的原始字节流，转换成一个完整的 `HttpRequest` 对象的。
 
-> 3、掌握 `HttpServer` 在成功解析一个请求后，是如何通过中间件链和路由表，最终找到应该处理这个请求的具体业务逻辑函数的。
+3、掌握 `HttpServer` 在成功解析一个请求后，是如何通过中间件链和路由表，最终找到应该处理这个请求的具体业务逻辑函数的。
 
-> 4、理解一个具体的 API 请求（如 AI 问答）是如何在 `LlamaHttpApplication` 中被处理，并最终生成一个 `HttpResponse` 返回给 `HttpServer`，再由 `HttpServer` 通过底层的 `TcpConnection` 发送回客户端的。
+4、理解一个具体的 API 请求（如 AI 问答）是如何在 `LlamaHttpApplication` 中被处理，并最终生成一个 `HttpResponse` 返回给 `HttpServer`，再由 `HttpServer` 通过底层的 `TcpConnection` 发送回客户端的。

@@ -101,9 +101,6 @@ kramdown:
   syntax_highlighter_opts:
     # Use existing pygments syntax highlighting css
     css_class: 'highlight'
-  # Enable Mermaid support
-  math_engine: mathjax
-  parse_block_html: true
 
 # Set the Sass partials directory, as we're using @imports
 sass:
